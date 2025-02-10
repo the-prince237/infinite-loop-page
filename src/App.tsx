@@ -5,7 +5,7 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [pages, setPages] = useState([0, 1])
+  const [pages, setPages] = useState(2)
   const scrollRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const prevScrollY = useRef<number>(0)
@@ -19,11 +19,11 @@ function App() {
     const scrollLimit = scrollHeight - viewportHeight - 5;
     
     if(scrollPosition >= prevScrollY.current) {
-      if ((scrollPosition-5) % scrollLimit === 0) {
-        setPages(pages => [...pages, pages.length]);
+      if ((scrollPosition - 5) % scrollLimit === 0) {
+        setPages(pages => pages+1);
       }
     } else {
-      setPages([0, 1])
+      setPages(2)
     }
 
     prevScrollY.current = scrollPosition;
@@ -38,8 +38,8 @@ function App() {
     <div className='App' ref={scrollRef} onScroll={handleScroll}>
       <div ref={wrapperRef} className='Wrapper'>
 
-    {pages.map(() => 
-      <div className='Content'>
+    {Array.from({length: pages}, (_item, index) => 
+      <div className='Content' key={index}>
         <div>
           <a href="https://vite.dev" target="_blank">
             <img src={viteLogo} className="logo" alt="Vite logo" />
