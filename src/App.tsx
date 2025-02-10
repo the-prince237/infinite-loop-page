@@ -12,13 +12,12 @@ function App() {
 
   const handleScroll = () => {
     const scrollPosition = scrollRef.current?.scrollTop || 0;
-
-    const scrollHeight = scrollRef.current?.scrollHeight || 0;
-    const viewportHeight = window.innerHeight;
-
-    const scrollLimit = scrollHeight - viewportHeight - 5;
     
     if(scrollPosition >= prevScrollY.current) {
+    const scrollHeight = scrollRef.current?.scrollHeight || 0;
+    const viewportHeight = window.innerHeight;
+    const scrollLimit = scrollHeight - viewportHeight - 5;
+    
       if ((scrollPosition - 5) % scrollLimit === 0) {
         setPages(pages => pages+1);
       }
